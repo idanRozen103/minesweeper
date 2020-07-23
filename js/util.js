@@ -20,6 +20,24 @@ function getRandomCell() {
 }
 
 
+function buildBoard() {
+    var board = [];
+    for (var i = 0; i < gLevel.ROWSIZE; i++) {
+        board[i] = [];
+        for (var j = 0; j < gLevel.COLUMNSIZE; j++) {
+            board[i][j] = {
+                value: EMPTY,
+                minesAroundCount: 0,
+                isShown: false,
+                isMine: false,
+                isMarked: false
+            };
+        }
+    }
+    return board
+}
+
+
 function setMinesNegsCount(board) {
     var currCellNeighbors;
     var board = gBoard;
@@ -66,7 +84,6 @@ function printMat(mat, selector) {
 }
 
 
-
 function disableMenu() {
     var elCells = document.querySelectorAll('td');
     for (var i = 0; i < elCells.length; i++) {
@@ -80,9 +97,8 @@ function disableMenu() {
 
 function renderCell(location, value, isShown) {
     var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-    if (isShown) {
-        elCell.classList.add('shown')
-    }
+    if (isShown) elCell.classList.add('shown')
+    else elCell.classList.remove('shown')
     elCell.innerHTML = value;
 }
 
@@ -94,6 +110,8 @@ function markNeighbors(cellI, cellJ) {
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= gBoard[i].length) continue;
             var location = { i, j }
+            if (gBoard[i][j].isMarked) continue;
+            if (gBoard[i][j].isShown) continue;
             gBoard[i][j].isShown = true
             gGame.shownCount++
             renderCell(location, gBoard[i][j].value, true)
@@ -102,11 +120,43 @@ function markNeighbors(cellI, cellJ) {
 }
 
 function timeCounter() {
-    var startTime = Date.now();
-    var currTime;
-    gTimeInterval = setInterval(function () {
-        currTime = Date.now() - startTime;
-        elTime.innerText = `${Math.floor(currTime / 1000)}`;
+    gGame.secsPassed++
+    elTime.innerText = (gGame.secsPassed <= 9 ? "00" + gGame.secsPassed :
+        (gGame.secsPassed > 99 ? gGame.secsPassed : "0" + gGame.secsPassed))
+    if (gGame === 999) clearInterval(gTimeInterval)
+}
 
-    }, 1000);
+function revealNeighbors(cellI, cellJ) {
+    for (var i = cellI - 1; i <= cellI + 1; i++) {
+        if (i < 0 || i >= gBoard.length) continue;
+        for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+            if (j < 0 || j >= gBoard[i].length) continue;
+            var location = { i, j }
+            if (gBoard[i][j].isShown) continue;
+
+            renderCell(location, gBoard[i][j].value, true)
+        }
+    }
+}
+
+function hideNeighbors(cellI, cellJ) {
+    for (var i = cellI - 1; i <= cellI + 1; i++) {
+        if (i < 0 || i >= gBoard.length) continue;
+        for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+            if (j < 0 || j >= gBoard[i].length) continue;
+            if (gBoard[i][j].isShown) continue
+            var location = { i, j }
+            if (gBoard[i][j].isMarked) renderCell(location, FLAG, false)
+
+            else renderCell(location, EMPTY, false)
+        }
+    }
+}
+
+function revealHints() {
+    for (var i = 1; i <= 3; i++) {
+        document.querySelector('.hint' + i).style.display = 'inline'
+        document.querySelector('.hint' + i).classList.remove('used-hint')
+
+    }
 }

@@ -9,7 +9,6 @@
 </head>
 
 <body onload="setLevel(0)">
-
     <div class="level-nav">
         <div class="beginner level" onclick="setLevel(1)">Beginner</div>
         <div class="intermediate level" onclick="setLevel(2)">Intermediate</div>
@@ -21,7 +20,21 @@
         <div class="mine-count"></div>
     </div>
 
-    <div class="board-container"></div>
+    <div class="game-extension">
+        <div class="extra">
+            <div class="hints">
+                <img class="hint1" onclick="useHint(this)" src="img/hint.png" />
+                <img class="hint2" onclick="useHint(this)" src="img/hint.png" />
+                <img class="hint3" onclick="useHint(this)" src="img/hint.png" /></div>
+            <div class="lives">
+                <img src="img/live.png" />
+                <img src="img/live.png" />
+                <img src="img/live.png" /></div>
+            </div>
+        
+        <div class="board-container"></div>
+    </div>
+    </div>
 
 
     <script src="js/util.js"></script>
