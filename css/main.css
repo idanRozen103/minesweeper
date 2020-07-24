@@ -1,6 +1,6 @@
 body{
     height: 600px;
-    background-image: url(/img/duringGame.png);
+    background-image: url("../img/duringGame.png");
     background-repeat:no-repeat;
     background-position: left bottom;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
