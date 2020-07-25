@@ -102,19 +102,30 @@ function renderCell(location, value, isShown) {
     elCell.innerHTML = value;
 }
 
-
 function markNeighbors(cellI, cellJ) {
+    if (gBoard[cellI][cellJ].isMarked) return;
+
     for (var i = cellI - 1; i <= cellI + 1; i++) {
         if (i < 0 || i >= gBoard.length) continue;
         for (var j = cellJ - 1; j <= cellJ + 1; j++) {
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= gBoard[i].length) continue;
             var location = { i, j }
-            if (gBoard[i][j].isMarked) continue;
             if (gBoard[i][j].isShown) continue;
+
+            if (gBoard[i][j].minesAroundCount !== 0) {
+                renderCell(location, gBoard[i][j].value, true)
+                gBoard[i][j].isShown = true
+                gGame.shownCount++
+                continue;
+            }
+
+            if (gBoard[i][j].isMine) return
+
+            renderCell(location, gBoard[i][j].value, true)
             gBoard[i][j].isShown = true
             gGame.shownCount++
-            renderCell(location, gBoard[i][j].value, true)
+            markNeighbors(i, j)
         }
     }
 }
@@ -157,6 +168,7 @@ function revealHints() {
     for (var i = 1; i <= 3; i++) {
         document.querySelector('.hint' + i).style.display = 'inline'
         document.querySelector('.hint' + i).classList.remove('used-hint')
+        document.querySelector('.hint' + i).src = "img/idea.png";
 
     }
 }

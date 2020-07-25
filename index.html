@@ -15,24 +15,35 @@
         <div class="expert level" onclick="setLevel(3)">Expert</div>
     </div>
     <div class="display-board">
+        <img src="img/watch.png">
         <div class="timer">000</div>
-        <img class="status" onclick="restart()" src="img/duringGame.png" />
+        <img src="img/bomb.png">
         <div class="mine-count"></div>
     </div>
 
     <div class="game-extension">
         <div class="extra">
             <div class="hints">
-                <img class="hint1" onclick="useHint(this)" src="img/hint.png" />
-                <img class="hint2" onclick="useHint(this)" src="img/hint.png" />
-                <img class="hint3" onclick="useHint(this)" src="img/hint.png" /></div>
+                <img class="hint1" onclick="hintClicked(this)" src="img/idea.png" />
+                <img class="hint2" onclick="hintClicked(this)" src="img/idea.png" />
+                <img class="hint3" onclick="hintClicked(this)" src="img/idea.png" /></div>
+            <img class="status" onclick="restart()" src="img/duringGame.png" />
+
             <div class="lives">
-                <img src="img/live.png" />
-                <img src="img/live.png" />
-                <img src="img/live.png" /></div>
+                <img src="img/heart.png" />
+                <img src="img/heart.png" />
+                <img src="img/heart.png" />
             </div>
-        
-        <div class="board-container"></div>
+
+        </div>
+
+        <div class="board-surrounding">
+            <div class="safe-cell" onclick="useSafeCell()">
+                <img src="img/unlock.png">
+                <p>left: <span>3</span></p>
+            </div>
+            <div class="board-container"></div>
+        </div>
     </div>
     </div>
 

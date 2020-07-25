@@ -1,11 +1,11 @@
 body{
-    height: 600px;
-    background-image: url("../img/duringGame.png");
+    background-position-x: 700px;
+    background-image: url("../img/minion-bc.jpg");
     background-repeat:no-repeat;
-    background-position: left bottom;
+    background-size: cover;
+    background-size: 1200px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: rgb(250, 248, 228);
-    /* background: linear-gradient(90deg rgb(226, 169, 10), rgb(253, 240, 213)); */
+    background-color: rgb(255, 255, 255);
  }
 
 .level-nav{
@@ -15,107 +15,175 @@ position: static;
 text-align: center;
 grid-template-columns: 1fr 1fr 1fr;
 margin: 0 auto;
-background-color: rgba(246, 212, 66, 0.85);
-border-radius: 12px;
-
 }
 
 .level{
+    background-color: rgba(246, 212, 66, 0.85);
+    width: 150px;
     font-size:20px;
     font-weight: bold ;
     text-shadow: 0px 0px 10px #cc6709;
     color: rgb(253, 250, 238);
     text-align: center;
-    margin: 30px;
+    margin: 10px;
     cursor: pointer;
+    border-radius: 15px ;
+    padding: 12px;
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+
+
+.level:active{
+    color: rgb(93, 119, 206);
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 2px 5px 2px rgba(17, 13, 13, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
 }
 
 .game-extension{
-    display: grid;
+    display: flex;
+    flex-direction: column;
     position: static;
     text-align: center;
-    grid-template-rows: 1fr auto;
-    margin:auto auto;
-    justify-content: center;
+    margin:auto;
 }
 
 .extra{
     width: auto;
-    height: auto;
+    height: 50px;
     display: grid;
-    grid-auto-columns: auto;
-    grid-template-columns: 10fr 10fr;
-   justify-items: auto;
-   grid-gap: 50px;
+    grid-template-columns: 7fr 1.5fr 7fr;
+    justify-items: self-end;
+    margin-right:  10px;
 }
 
-.extra img{
-    width: 40px;
-    height: 40px;
-    }
+img.status{
+    padding-right:  30px;
+
+    cursor: pointer;
+    height: 60px;
+}
     
 
 .hints {
     grid-template-columns: 1fr 1fr 1fr;
     cursor: pointer;
+    margin:  0;
+    padding-top: 20px;
 }
 
  .hints img {
     width: 45px;
-    height: 45px;
-    margin-top: 3px;
+    height: 42px;
+    border-radius: 10%;
+    text-shadow: black;
+}
+
+.hints img:active{
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0 2px 5px 2px rgba(17, 13, 13, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
 }
 
 .lives{
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 5px;
+    padding-top: 30px;
+    margin-right: auto;
+}
+
+
+.board-surrounding{
+    width: 500px;
+    display: flex;
+     margin: auto;
+}
+
+.safe-cell{
+    position: absolute;
+top: 190px;
+    max-width: 50px;
+    margin: 20px auto;
+    grid-column: 1/2;
+    font-size: small;
+    color: rgb(96, 103, 126);
+}
+
+.safe-cell img{
+    /* right: 100px; */
+    border:1px dotted rgb(255, 196, 1);
+    border-radius: 10px;
+    width: 40px;
+    height: 35px;
+    cursor: pointer;
+    padding: 2px;
+    box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
+
+}
+.safe-cell img:active{
+box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0 2px 5px 2px rgba(17, 13, 13, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+
+.safe-cell p{
+    margin: 6px 0;
 }
 
 table {
     text-align: center;
     position: static;
-    margin: 20px auto;
+    margin: 30px auto;
     top: 15%;
     font-size: 18px;
     width: auto;
     height: auto;
     border: 2px solid rgb(255, 196, 1);
-    border-radius: 2%;
+    border-collapse: collapse;
+}
+
+.board-container{
+    width: 500px;
+    margin: 3px;
+    justify-content: center;
 }
 
 td {
     display: inline-block;
     width: 25px;
     height: 25px;
-    padding: 3px;
-    border: 2px groove rgb(138, 74, 1);  
-    border-radius: 9%;
-    cursor: pointer;
-    background: linear-gradient(150deg, rgb(247, 200, 173), rgb(109, 5, 1));
+        background: linear-gradient(-35deg, rgb(54, 123, 180), rgb(152, 195, 239));
+
 }
 
 .display-board{
-    font-size: 30px;
-    width: 600px;
+    font-size: 25px;
+    width: 500px;
     display: grid;
     position: static;
-    text-align: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 0.2fr 2fr 0.3fr 0.8fr;
     margin: 10px auto;
-    justify-items: center;
+}
+
+.display-board img{
+    padding-top: 5px;
+    padding-left: 30px;
+    width: 20px;
+    height: 20px;
+}
+
+.mine-count{
+padding-left: 10px;
+}
+
+.timer{
+padding-left: 20px ;
+}
+
+.lives img{
+    width: 30px;
+    height: 30px;
 }
 
 .status{
+    margin-left: 0;
     width: 60px;
     height: 60px;
 }
 
 .shown{
-    color: rgb(255, 255, 255);
-    background: linear-gradient(-45deg, rgb(245, 228, 192), rgb(224, 183, 130));
-}
-
-.used-hint{
-border: 1px solid red;
-
-}
+    color: rgb(78, 61, 61);
+    background: linear-gradient(-45deg, rgb(245, 228, 192), #FFC107);}
